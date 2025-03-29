@@ -38,6 +38,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.inventory.ItemStack;
@@ -64,6 +65,9 @@ import java.util.logging.Level;
 public class ExoticGarden extends JavaPlugin implements SlimefunAddon {
 
     public static ExoticGarden instance;
+
+    public static Particle angryVillager;
+    public static Material grass;
 
     private final File schematicsFolder = new File(getDataFolder(), "schematics");
 
@@ -101,10 +105,20 @@ public class ExoticGarden extends JavaPlugin implements SlimefunAddon {
             new GitHubBuildsUpdater(this, getFile(), "TheBusyBiscuit/ExoticGarden/master").start();
         }
 
+        int minecraftVersion = PaperLib.getMinecraftVersion();
+
         registerItems();
+
+        setupCompatibility(minecraftVersion);
 
         new AndroidListener(this);
         new PlantsListener(this);
+    }
+
+    private void setupCompatibility(int minecraftVersion) {
+        angryVillager = minecraftVersion >= 1170 ? Particle.valueOf("ANGRY_VILLAGER") : Particle.valueOf("VILLAGER_ANGRY");
+        angryVillager = minecraftVersion >= 1170 ? Particle.valueOf("ANGRY_VILLAGER") : Particle.valueOf("VILLAGER_ANGRY");
+        grass = minecraftVersion >= 1203 ? Material.getMaterial("SHORT_GRASS") : Material.getMaterial("GRASS");
     }
 
     private void registerItems() {
