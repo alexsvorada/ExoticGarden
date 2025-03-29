@@ -110,11 +110,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.slimefun</groupId>
+            <groupId>com.github.Slimefun</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>LOCAL</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/Slimefun v4.9-UNOFFICIAL.jar</systemPath>
+            <version>experimental-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>io.github.baked-libs</groupId>
